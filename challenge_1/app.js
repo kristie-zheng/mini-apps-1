@@ -15,19 +15,18 @@ when user1 hits submit, it will pass the dropdown's values and the currentUser i
 
 
 */
-var currentUser = 'player1';
+var currentPlayer = 'X';
 
 var addPiece = function(piece, coordinates) {
-  
+  console.log(piece)
   var horiz = Number(coordinates[0]);
   var vert = Number(coordinates[1]);
   if (board[horiz][vert] === '.' ) {
     board[horiz][vert] = piece;
     document.getElementsByClassName(coordinates[0]).innerHTML = piece;
-    console.log(board)
-    /*todo: toggle to the other player*/
+    currentPlayer === 'X' ? currentPlayer = 'O' : currentPlayer = 'X';
+  console.log('its', currentPlayer)
   } else {
-console.log(123);
     document.getElementsByClassName('message')[0].innerHTML = 'There is already a piece there';
   }
 };
