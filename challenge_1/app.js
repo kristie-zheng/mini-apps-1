@@ -1,9 +1,9 @@
-/*
-use an array of arrays to store the gameboard status
+
+//use an array of arrays to store the gameboard status
 var board = [['.','.','.'], 
              ['.','.','.'],
              ['.','.','.']]
-*/
+
 
 /*
 var currentUser = 'playerX';
@@ -17,12 +17,18 @@ when user1 hits submit, it will pass the dropdown's values and the currentUser i
 */
 var currentUser = 'player1';
 
-var addPiece = function(piece, horiz, vert) {
-  if (gameboard[horiz][vert] === '.' ) {
-    gameboard[horiz][vert] = piece;
+var addPiece = function(piece, coordinates) {
+  
+  var horiz = Number(coordinates[0]);
+  var vert = Number(coordinates[1]);
+  if (board[horiz][vert] === '.' ) {
+    board[horiz][vert] = piece;
+    document.getElementsByClassName(coordinates[0]).innerHTML = piece;
+    console.log(board)
     /*todo: toggle to the other player*/
   } else {
-    /*todo: change the HTML of the message*/
+console.log(123);
+    document.getElementsByClassName('message')[0].innerHTML = 'There is already a piece there';
   }
 };
 /*function addPiece
