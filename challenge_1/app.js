@@ -22,47 +22,58 @@ var addPiece = function(piece, coordinates) {
     if (board[horiz][vert] === '.' ) {
       board[horiz][vert] = piece;
       document.getElementsByClassName(coordinates)[0].innerHTML = piece;
-      if (checkHorizontalWin(board[horiz]) === true || checkDiagonalWin() === true) {
+      if (checkHorizontalWin(board[horiz]) === true || checkDiagonalWin() === true || checkVerticalWin(vert) === true) {
        document.getElementsByClassName('message')[0].innerHTML = 'Winner';
       }
       currentPlayer === 'X' ? currentPlayer = 'O' : currentPlayer = 'X';
     } else {
       document.getElementsByClassName('message')[0].innerHTML = 'There is already a piece there!';
     }
-  
-  console.log('gameover')
 };
 
 // var checkWinner = function() {
 
 // };
+ 
+
+const reducer = function (accumulator, currentValue) {
+  console.log('acc', accumulator)
+  console.log('cv', currentValue)
+  console.log(accumulator === currentValue)
+  return accumulator = currentValue; 
+};
 
 var checkHorizontalWin = function(row) {
   var win = false;
   var winner;
-
-  var allSame = function(currentVal) {
-    if (currentVal !== '@') {  
-    return currentVal === row[0];
-    }
-  };
-
-  if (row.every(allSame) === true) {
+  if (row.reduce(reducer, row[0]) === row[0] && row[0] !== '.') {
     win = true;
   }
+  console.log(win);
   return win;
 };
 
-// var checkVerticalWin = function() {
-//   var win = false;
-//   for (var )
+var checkVerticalWin = function(colCoord) {
+  var win = false;
+  var column = [board[0][colCoord], board[1][colCoord], board[2][colCoord]];
+  console.log(column);
+  if (column.reduce(reducer, column[0]) === column[0] && column[0] !== '.') {
+    win = true;
+  }
+  console.log(win);
+  return win;
 
-// };
+};
 
 var checkDiagonalWin = function() {
   var win = false;
   var winner;
-  if ((board[0][0] === board[1][1] === board [2][2]) || (board[0][2] === board[1][1] === board[2][0])) {
+  var leftDiagonal = [board[0][0], board[1][1], board [2][2]];
+  var rightDiagonal = [board[0][2], board[1][1], board[2][0]];
+  if ((leftDiagonal.reduce(reducer, board[0][0]) === board[0][0]) && board[0][0] !== '.') {
+    win = true;
+    winner = board[1][1];
+  } else if ((rightDiagonal.reduce(reducer, board[1][1]) === board[1][1]) && board[1][1] !== '.') {
     win = true;
     winner = board[1][1];
   }
