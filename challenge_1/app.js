@@ -71,6 +71,16 @@ var checkDiagonalWin = function() {
   }  
   return win;
 };
+
+var resetGame = function() {
+  for (var row = 0; row < board.length; row++) {
+    for (var column = 0; column < board.length; column++) {
+      var coords = String(row) + String(column);
+      board[row][column] = '.';
+      document.getElementsByClassName(coords)[0].innerHTML = '@';
+    }
+  }
+};
 /*function addPiece
 i: a game piece (x or o), horizontal coordinate (0-2), and vertical coordinate (0-2)
 o: none, but modifies the gameBooard array as a side effect
