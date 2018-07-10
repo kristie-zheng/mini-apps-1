@@ -1,4 +1,3 @@
-
 //use an array of arrays to store the gameboard status
 var board = [['.','.','.'], 
              ['.','.','.'],
@@ -15,30 +14,41 @@ when user1 hits submit, it will pass the dropdown's values and the currentUser i
 */
 
 var currentPlayer = 'X';
+var gameOver = false;
 
 var addPiece = function(piece, coordinates) {
   var horiz = Number(coordinates[0]);
   var vert = Number(coordinates[1]);
-  if (board[horiz][vert] === '.' ) {
-    board[horiz][vert] = piece;
-    document.getElementsByClassName(coordinates)[0].innerHTML = piece;
-    currentPlayer === 'X' ? currentPlayer = 'O' : currentPlayer = 'X';
-  } else {
-    document.getElementsByClassName('message')[0].innerHTML = 'There is already a piece there!';
-  }
-};
-
-var checkWinner = function() {
-
-};
-
-var checkHorizontalWin = function() {
-  var win = false;
-  for (var i = 0; i < board.length; i++) {
-    var row = board[i];
-    if (board[i][0] === board[i][1] === board[i][2]) {
-      win = true;
+    if (board[horiz][vert] === '.' ) {
+      board[horiz][vert] = piece;
+      document.getElementsByClassName(coordinates)[0].innerHTML = piece;
+      if (checkHorizontalWin(board[horiz]) === true || checkDiagonalWin() === true) {
+       document.getElementsByClassName('message')[0].innerHTML = 'Winner';
+      }
+      currentPlayer === 'X' ? currentPlayer = 'O' : currentPlayer = 'X';
+    } else {
+      document.getElementsByClassName('message')[0].innerHTML = 'There is already a piece there!';
     }
+  
+  console.log('gameover')
+};
+
+// var checkWinner = function() {
+
+// };
+
+var checkHorizontalWin = function(row) {
+  var win = false;
+  var winner;
+
+  var allSame = function(currentVal) {
+    if (currentVal !== '@') {  
+    return currentVal === row[0];
+    }
+  };
+
+  if (row.every(allSame) === true) {
+    win = true;
   }
   return win;
 };
@@ -51,8 +61,10 @@ var checkHorizontalWin = function() {
 
 var checkDiagonalWin = function() {
   var win = false;
+  var winner;
   if ((board[0][0] === board[1][1] === board [2][2]) || (board[0][2] === board[1][1] === board[2][0])) {
     win = true;
+    winner = board[1][1];
   }
   return win;
 };
