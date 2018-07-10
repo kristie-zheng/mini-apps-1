@@ -31,51 +31,31 @@ var addPiece = function(piece, coordinates) {
     }
 };
 
-// var checkWinner = function() {
-
-// };
- 
-
-const reducer = function (accumulator, currentValue) {
-  console.log('acc', accumulator)
-  console.log('cv', currentValue)
-  console.log(accumulator === currentValue)
-  return accumulator = currentValue; 
-};
 
 const filterItems = function(row, anchor) {
   return row.filter(function(element) {
-    if (element === anchor) {
+    if (element === anchor && anchor !== '.') {
       return true;
     }
   });
-}
+};
+
 var checkHorizontalWin = function(row) {
   var win = false;
   var winner;
-  // if (row.reduce(reducer, row[0]) === row[0] && row[0] !== '.') {
-  //   win = true;
-  // }
   if (filterItems(row, row[0]).length === 3) {
     win = true;
   }
-  console.log(win);
   return win;
 };
 
 var checkVerticalWin = function(colCoord) {
   var win = false;
   var column = [board[0][colCoord], board[1][colCoord], board[2][colCoord]];
-  console.log(column);
-  // if (column.reduce(reducer, column[0]) === column[0] && column[0] !== '.') {
-  //   win = true;
-  // }
   if (filterItems(column, board[0][colCoord]).length === 3) {
     win = true;
   }
-  console.log(win);
   return win;
-
 };
 
 var checkDiagonalWin = function() {
@@ -83,13 +63,12 @@ var checkDiagonalWin = function() {
   var winner;
   var leftDiagonal = [board[0][0], board[1][1], board [2][2]];
   var rightDiagonal = [board[0][2], board[1][1], board[2][0]];
-  if ((leftDiagonal.reduce(reducer, board[0][0]) === board[0][0]) && board[0][0] !== '.') {
+  if (filterItems(leftDiagonal, board[1][1]).length === 3) {
     win = true;
-    winner = board[1][1];
-  } else if ((rightDiagonal.reduce(reducer, board[1][1]) === board[1][1]) && board[1][1] !== '.') {
+  } 
+  if (filterItems(rightDiagonal, board[1][1]).length === 3) {
     win = true;
-    winner = board[1][1];
-  }
+  }  
   return win;
 };
 /*function addPiece
