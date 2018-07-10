@@ -43,10 +43,20 @@ const reducer = function (accumulator, currentValue) {
   return accumulator = currentValue; 
 };
 
+const filterItems = function(row, anchor) {
+  return row.filter(function(element) {
+    if (element === anchor) {
+      return true;
+    }
+  });
+}
 var checkHorizontalWin = function(row) {
   var win = false;
   var winner;
-  if (row.reduce(reducer, row[0]) === row[0] && row[0] !== '.') {
+  // if (row.reduce(reducer, row[0]) === row[0] && row[0] !== '.') {
+  //   win = true;
+  // }
+  if (filterItems(row, row[0]).length === 3) {
     win = true;
   }
   console.log(win);
@@ -57,7 +67,10 @@ var checkVerticalWin = function(colCoord) {
   var win = false;
   var column = [board[0][colCoord], board[1][colCoord], board[2][colCoord]];
   console.log(column);
-  if (column.reduce(reducer, column[0]) === column[0] && column[0] !== '.') {
+  // if (column.reduce(reducer, column[0]) === column[0] && column[0] !== '.') {
+  //   win = true;
+  // }
+  if (filterItems(column, board[0][colCoord]).length === 3) {
     win = true;
   }
   console.log(win);
