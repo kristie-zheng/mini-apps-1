@@ -1,4 +1,3 @@
-//var $ = import('jquery');
 // //set up express
 // var express = require('express');
 // var app = express();
@@ -54,4 +53,3 @@ $.ajax('/', {
   }
 });
 
-console.log($(document.body));
