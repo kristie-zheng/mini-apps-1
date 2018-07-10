@@ -10,7 +10,10 @@ var saved = [];
 //serve the static HTML file
 app.use(express.static('client'));
 app.use(express.static('node_modules'));
-// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.json());
 //get request
 // app.get('/', function(request, response) {
 //   response.send('csv app');
@@ -26,8 +29,10 @@ app.listen(3000, function() {
 //here is the route to handle a post request from AJAX
 app.post('/', function(req, res) {
   // requestHandler.requestHandler();
-  console.log(req.body)
+  console.log('here is the req body', req.body)
+  // console.log(JSON.stringify(req.body));
   res.send(req.body);
+  red.end();
 });
 
 //here is the route to handle a get request from AJAX

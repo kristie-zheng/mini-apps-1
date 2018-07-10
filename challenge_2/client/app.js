@@ -9,7 +9,7 @@ var submitHandler = function() {
   //POST request that submits stringified data to server 
   $.ajax('/', {
     method: 'POST',
-    contentType: 'application/JSON',
+    //contentType: 'application/JSON',
     data: dataJSON,
     //dataType: //what you expect to receive back
     success: function(data) {
