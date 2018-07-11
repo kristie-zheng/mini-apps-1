@@ -22,28 +22,33 @@ app.use(bodyParser.json());
 
 
 //start up the server
-app.listen(3000, function() {``
+app.listen(3000, function() {
   console.log('app listening on port 3k');
 });
 
 //here is the route to handle a post request from AJAX
 app.post('/', function(req, res) {
   console.log('here is the req body', Object.keys(req.body)[0]); //able to receive the string of the request body
-  // console.log('here is the parsed req body', JSON.parse(req.body))
+  console.log('here is the parsed req body', JSON.parse(Object.keys(req.body)[0]));
+  convertJSONToCSV(JSON.parse(Object.keys(req.body)[0])['data']);
   res.send(req.body);
   res.end();
 });
 
 //here is the route to handle a get request from AJAX
-app.get('/', function(req, res) {
-  res.send('you made a get req');
-});
+// app.get('/', function(req, res) {
+//   res.send('you made a get req');
+// });
 
 //need a function on the server side to convert the received JSON data and turn into CSV
-var convertJSONToCSV = function() {
-  return req.body.map(function(element) {
-    return JSON.stringify(element);
-  });
+var convertJSONToCSV = function(data) {
+  var csvString = '';
+  for (var key in data) {
+    console.log(data);
+    console.log('*',data[key])
+    csvString+=data[key] + ',';
+  }
+  console.log(csvString);
 }
 
 
