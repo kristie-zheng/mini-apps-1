@@ -65,6 +65,7 @@ var obj =
     //dataType: //what you expect to receive back
     success: function(data) {
       console.log('this data was posted', data);
+      $(".textAreaContainer").append(`<div> ${data}</div>`);
     },
     error: function(error) {
       console.log('failed to post', error);
@@ -72,20 +73,20 @@ var obj =
   });
 };
 
-var getHandler = function() {
-  $.ajax('/', {
-    method: 'GET',
-    //dataType: 'application/JSON',
-    success: function(data) {
-      console.log('here is the data', data);
-      $(".textAreaContainer").append(`<div> ${data} HEY</div>`);
-      $('button').css('color', 'blue');
-    },
-    error: function(error) {
-      console.log('failed to get', error);
-    }
-  });
-};
+// var getHandler = function() {
+//   $.ajax('/', {
+//     method: 'GET',
+//     //dataType: 'application/JSON',
+//     success: function(data) {
+//       console.log('here is the data', data);
+//       $(".textAreaContainer").append(`<div> ${data} HEY</div>`);
+//       $('button').css('color', 'blue');
+//     },
+//     error: function(error) {
+//       console.log('failed to get', error);
+//     }
+//   });
+// };
 
 
 // //get request that receives the JSON from server to be converted into CSV
