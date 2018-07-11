@@ -22,24 +22,20 @@ app.use(bodyParser.json());
 
 
 //start up the server
-app.listen(3000, function() {
+app.listen(3000, function() {``
   console.log('app listening on port 3k');
 });
 
 //here is the route to handle a post request from AJAX
 app.post('/', function(req, res) {
-  // requestHandler.requestHandler();
   console.log('here is the req body', req.body)
-  saved.push(req.body);
-  console.log(saved)
-  // console.log(JSON.stringify(req.body));
-  res.send(req.body);
+  res.send('turn down for that')
   res.end();
 });
 
 //here is the route to handle a get request from AJAX
 app.get('/', function(req, res) {
-  res.send('...');
+  res.send('you made a get req');
 });
 
 //need a function on the server side to convert the received JSON data and turn into CSV
