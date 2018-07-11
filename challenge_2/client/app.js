@@ -24,15 +24,19 @@ var submitHandler = function() {
 var getHandler = function() {
   $.ajax('/', {
     method: 'GET',
-    dataType: 'application/JSON',
+    //dataType: 'application/JSON',
     success: function(data) {
-      console.log('here is the data', JSON.parse(data));
+      console.log('here is the data', data);
+      $(".textAreaContainer").append(`<div> ${data} HEY</div>`);
+      $('button').css('color', 'blue');
     },
     error: function(error) {
       console.log('failed to get', error);
     }
   });
 };
+
+
 // //get request that receives the JSON from server to be converted into CSV
 
 //module.exports.requestHandler = requestHandler;

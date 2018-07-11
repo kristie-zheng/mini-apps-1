@@ -30,15 +30,24 @@ app.listen(3000, function() {
 app.post('/', function(req, res) {
   // requestHandler.requestHandler();
   console.log('here is the req body', req.body)
+  saved.push(req.body);
+  console.log(saved)
   // console.log(JSON.stringify(req.body));
   res.send(req.body);
-  red.end();
+  res.end();
 });
 
 //here is the route to handle a get request from AJAX
-// app.get('/', function(req, res) {
-//   res.send('you made a get req');
-// });
+app.get('/', function(req, res) {
+  res.send('...');
+});
+
+//need a function on the server side to convert the received JSON data and turn into CSV
+var convertJSONToCSV = function() {
+  return req.body.map(function(element) {
+    return JSON.stringify(element);
+  });
+}
 
 
 exports.app = app;
