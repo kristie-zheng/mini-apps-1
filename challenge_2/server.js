@@ -28,8 +28,9 @@ app.listen(3000, function() {``
 
 //here is the route to handle a post request from AJAX
 app.post('/', function(req, res) {
-  console.log('here is the req body', req.body)
-  res.send('turn down for that')
+  console.log('here is the req body', Object.keys(req.body)[0]); //able to receive the string of the request body
+  // console.log('here is the parsed req body', JSON.parse(req.body))
+  res.send(req.body);
   res.end();
 });
 
