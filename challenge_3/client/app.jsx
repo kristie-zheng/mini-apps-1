@@ -7,44 +7,52 @@ class App extends React.Component {
     super(props);
   }
   render() {
-    return (<div> <h1> Placeholder text here </h1> </div>);
+    return (
+      <div> 
+        <h1> 
+          Placeholder text here 
+        </h1> 
+        <Form1/>
+      </div>
+    )
   }
 }
 //form1 component
-var form1 = (props) => {
+var Form1 = (props) => {
   return (
     //insert form fields here
     <div>
-    <form class= "accountInfo">
-      First Name: <br> </br>
-      <input type ="text" class= "firstName"> </input> <br> </br> 
-      Last Name: <br></br>
-      <input type ="text" class= "lastName"> </input><br> </br>
-      Email: <br></br>
-      <input type ="text" class= "email"> </input><br> </br>
-      Password: <br></br>
-      <input type ="text" class= "password"> </input><br> </br>
+   
+    <form className= "accountInfo">
+      First Name: 
+      <input type ="text" className= "firstName"/> <br/>
+      Last Name:
+      <input type ="text" className= "lastName"/> <br/>
+      Email: 
+      <input type ="text" className= "email"/> <br/>
+      Password: 
+      <input type ="text" className= "password"/> <br/>
     </form>
-    <button type = "button" class= "next"> Next </button>
+    <button type = "button" className= "next"> Next </button>
     </div>
   );
 };
 
-var form2 = (props) => {
+var Form2 = (props) => {
   return (
     //insert form fields here
     <div>
-    <form class= "accountInfo">
-      First Name: <br></br>
-      <input type ="text" class= "firstName"> </input><br> </br>
-      Last Name: <br></br>
-      <input type ="text" class= "lastName"> </input><br> </br>
-      Email: <br></br>
-      <input type ="text" class= "email"> </input><br> </br>
-      Password: <br></br>
-      <input type ="text" class= "password"> </input><br> </br>
-    </form>
-    <button type = "button" class= "next"> Next </button>
+      <form class= "accountInfo">
+        First Name: 
+        <input type ="text" class= "firstName"> </input>
+        Last Name: 
+        <input type ="text" class= "lastName"> </input>
+        Email: 
+        <input type ="text" class= "email"> </input>
+        Password:
+        <input type ="text" class= "password"> </input>
+      </form>
+      <button type = "button" class= "next"> Next </button>
     </div>
   );
 };
