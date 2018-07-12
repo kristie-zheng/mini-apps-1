@@ -1,5 +1,4 @@
-// var connection = require('./connection');
-
+//cannot use require keyword here
 //class App overall will render the remainder of the components
 class App extends React.Component {
   constructor(props) {
@@ -24,6 +23,17 @@ class App extends React.Component {
       console.log(this.state);
       });
     }
+    $.ajax({
+      url: '/',
+      method: 'POST',
+      data: 'hello', 
+      success: function(data) {
+        console.log('here is data return from server', data);
+      },
+      error: function(error) {
+        console.log('error', error);
+      }
+    });
   }
   render() {
     return (
@@ -32,9 +42,6 @@ class App extends React.Component {
           Checkout 
         </h1> 
         <DisplayedForm handleClick = {this.handleClick} currentPage = {this.state.currentPage}/>
-        {/*<AccountInformation handleClick = {this.handleClick}/>
-        <ShippingInformation handleClick = {this.handleClick}/> 
-        <PaymentInformation/> */}
       </div>
     )
   }
@@ -46,7 +53,7 @@ var AccountInformation = (props) => {
     //insert form fields here
     <div>
    
-    <form className= "accountInfo">
+    <form className= "accountInfo" method="post" action="server.js">
       First Name: 
       <input type ="text" className= "firstName"/> <br/>
       Last Name:
