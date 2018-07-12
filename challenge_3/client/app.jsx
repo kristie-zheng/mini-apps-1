@@ -14,14 +14,17 @@ class App extends React.Component {
     if (this.state.currentPage === 'accountInfo') {
       this.setState({currentPage: 'shippingInfo'}, function() {
       console.log(this.state);
-        
       });
     } else if (this.state.currentPage === 'shippingInfo') {
       this.setState({currentPage: 'paymentInfo'}, function() {
       console.log(this.state);
-    });
+      });
+    } else if (this.state.currentPage === 'paymentInfo') {
+      this.setState({currentPage: 'confirmation'}, function() {
+      console.log(this.state);
+      });
+    }
   }
-}
   render() {
     return (
       <div> 
@@ -84,6 +87,7 @@ var ShippingInformation = (props) => {
 };
 
 var PaymentInformation = (props) => {
+  var handleClick = props.handleClick;
   return (
       <div>
       <form className= "paymentInfo">
@@ -96,9 +100,18 @@ var PaymentInformation = (props) => {
         Billing Zipcode:
         <input type="text" className="billingZip"/><br/>
       </form>
-      <button type = "button" className= "submit"> Submit </button>
+      <button type = "button" className= "submit" onClick = {handleClick}> Submit </button>
     </div>
   );
+}
+
+var Confirmation = (props) => {
+  return (
+    <div>
+    <p>Confirmation</p>
+    <button type = "button" className= "purchase"> Purchase </button>
+    </div>
+  )
 }
 
 var DisplayedForm = (props) => {
@@ -108,7 +121,9 @@ var DisplayedForm = (props) => {
   } else if (props.currentPage === 'shippingInfo') {
     return (<ShippingInformation handleClick = {props.handleClick}/>);
   } else if (props.currentPage === 'paymentInfo') {
-    return (<PaymentInformation/>);
+    return (<PaymentInformation handleClick = {props.handleClick}/>);
+  } else if (props.currentPage === 'confirmation') {
+    return (<Confirmation/>);
   }
 }
 
