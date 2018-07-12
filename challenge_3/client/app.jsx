@@ -1,10 +1,13 @@
-var connection = require('./connection');
+// var connection = require('./connection');
 
 //class App overall
-Class App extends React.Component {
-  super(props);
+//maybe we need to make it a component like the rest of them
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
-    return <h1> Placeholder text here </h1>;
+    return (<div> <h1> Placeholder text here </h1> </div>);
   }
 }
 //form1 component
@@ -13,21 +16,40 @@ var form1 = (props) => {
     //insert form fields here
     <div>
     <form class= "accountInfo">
-      First Name: <br>
-      <input type ="text" class= "firstName"> <br>
-      Last Name: <br>
-      <input type ="text" class= "lastName"> <br>
-      Email: <br>
-      <input type ="text" class= "email"> <br>
-      Password: <br>
-      <input type ="text" class= "password"> <br>
+      First Name: <br> </br>
+      <input type ="text" class= "firstName"> </input> <br> </br> 
+      Last Name: <br></br>
+      <input type ="text" class= "lastName"> </input><br> </br>
+      Email: <br></br>
+      <input type ="text" class= "email"> </input><br> </br>
+      Password: <br></br>
+      <input type ="text" class= "password"> </input><br> </br>
     </form>
     <button type = "button" class= "next"> Next </button>
     </div>
   );
 };
 
-//form2 component
+var form2 = (props) => {
+  return (
+    //insert form fields here
+    <div>
+    <form class= "accountInfo">
+      First Name: <br></br>
+      <input type ="text" class= "firstName"> </input><br> </br>
+      Last Name: <br></br>
+      <input type ="text" class= "lastName"> </input><br> </br>
+      Email: <br></br>
+      <input type ="text" class= "email"> </input><br> </br>
+      Password: <br></br>
+      <input type ="text" class= "password"> </input><br> </br>
+    </form>
+    <button type = "button" class= "next"> Next </button>
+    </div>
+  );
+};
 
 
-//form 3 component
+window.App = App;
+
+ReactDOM.render(<App />, document.getElementById('app'));
