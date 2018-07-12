@@ -28,9 +28,10 @@ class App extends React.Component {
         <h1> 
           Checkout 
         </h1> 
-        <AccountInformation handleClick = {this.handleClick}/>
-        <ShippingInformation handleClick = {this.handleClick}/>
-        <PaymentInformation/>
+        <DisplayedForm handleClick = {this.handleClick} currentPage = {this.state.currentPage}/>
+        {/*<AccountInformation handleClick = {this.handleClick}/>
+        <ShippingInformation handleClick = {this.handleClick}/> 
+        <PaymentInformation/> */}
       </div>
     )
   }
@@ -100,6 +101,16 @@ var PaymentInformation = (props) => {
   );
 }
 
+var DisplayedForm = (props) => {
+  var pageToDisplay = props.currentPage;
+  if (props.currentPage === 'accountInfo') {
+    return (<AccountInformation handleClick = {props.handleClick}/>); 
+  } else if (props.currentPage === 'shippingInfo') {
+    return (<ShippingInformation handleClick = {props.handleClick}/>);
+  } else if (props.currentPage === 'paymentInfo') {
+    return (<PaymentInformation/>);
+  }
+}
 
 window.App = App;
 
