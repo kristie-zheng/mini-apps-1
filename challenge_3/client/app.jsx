@@ -4,15 +4,32 @@
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      currentPage: 'accountInfo'
+    };
+    this.handleClick = this.handleClick.bind(this);
   }
+
+  handleClick(event) {
+    if (this.state.currentPage === 'accountInfo') {
+      this.setState({currentPage: 'shippingInfo'}, function() {
+      console.log(this.state);
+        
+      });
+    } else if (this.state.currentPage === 'shippingInfo') {
+      this.setState({currentPage: 'paymentInfo'}, function() {
+      console.log(this.state);
+    });
+  }
+}
   render() {
     return (
       <div> 
         <h1> 
           Checkout 
         </h1> 
-        <AccountInformation/>
-        <ShippingInformation/>
+        <AccountInformation handleClick = {this.handleClick}/>
+        <ShippingInformation handleClick = {this.handleClick}/>
         <PaymentInformation/>
       </div>
     )
@@ -20,6 +37,7 @@ class App extends React.Component {
 }
 //form1 component
 var AccountInformation = (props) => {
+  var handleClick = props.handleClick;
   return (
     //insert form fields here
     <div>
@@ -34,12 +52,13 @@ var AccountInformation = (props) => {
       Password: 
       <input type ="text" className= "password"/> <br/>
     </form>
-    <button type = "button" className= "next"> Next </button>
+    <button type = "button" className= "next" onClick = {handleClick}> Next </button>
     </div>
   );
 };
 
 var ShippingInformation = (props) => {
+  var handleClick = props.handleClick;
   return (
     //insert form fields here
     <div>
@@ -58,7 +77,7 @@ var ShippingInformation = (props) => {
         <input type ="text" className= "phone"/> <br/>
 
       </form>
-      <button type = "button" className= "next"> Next </button>
+      <button type = "button" className= "next" onClick = {handleClick}> Next </button>
     </div>
   );
 };
@@ -66,7 +85,7 @@ var ShippingInformation = (props) => {
 var PaymentInformation = (props) => {
   return (
       <div>
-      <form className= "paymentInformation">
+      <form className= "paymentInfo">
         Credit Card Number:
         <input type="text" className= "creditCardNum"/> <br/>
         Expiration Date:
