@@ -1,7 +1,6 @@
 // var connection = require('./connection');
 
-//class App overall
-//maybe we need to make it a component like the rest of them
+//class App overall will render the remainder of the components
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -10,15 +9,17 @@ class App extends React.Component {
     return (
       <div> 
         <h1> 
-          Placeholder text here 
+          Checkout 
         </h1> 
-        <Form1/>
+        <AccountInformation/>
+        <ShippingInformation/>
+        <PaymentInformation/>
       </div>
     )
   }
 }
 //form1 component
-var Form1 = (props) => {
+var AccountInformation = (props) => {
   return (
     //insert form fields here
     <div>
@@ -38,24 +39,47 @@ var Form1 = (props) => {
   );
 };
 
-var Form2 = (props) => {
+var ShippingInformation = (props) => {
   return (
     //insert form fields here
     <div>
-      <form class= "accountInfo">
-        First Name: 
-        <input type ="text" class= "firstName"> </input>
-        Last Name: 
-        <input type ="text" class= "lastName"> </input>
-        Email: 
-        <input type ="text" class= "email"> </input>
-        Password:
-        <input type ="text" class= "password"> </input>
+      <form className= "shippingInfo">
+        Address: 
+        <input type ="text" className= "address1"/> <br/>
+        Address Line 2: 
+        <input type ="text" className= "address2"/> <br/>
+        City: 
+        <input type ="text" className= "city"/> <br/>
+        State:
+        <input type ="text" className= "state"/> <br/>
+        Zipcode:
+        <input type ="text" className= "zip"/> <br/>
+        Phone Number:
+        <input type ="text" className= "phone"/> <br/>
+
       </form>
-      <button type = "button" class= "next"> Next </button>
+      <button type = "button" className= "next"> Next </button>
     </div>
   );
 };
+
+var PaymentInformation = (props) => {
+  return (
+      <div>
+      <form className= "paymentInformation">
+        Credit Card Number:
+        <input type="text" className= "creditCardNum"/> <br/>
+        Expiration Date:
+        <input type = "text" className = "expirationDate"/><br/>
+        CVV:
+        <input type="text" className= "cvv"/><br/>
+        Billing Zipcode:
+        <input type="text" className="billingZip"/><br/>
+      </form>
+      <button type = "button" className= "submit"> Submit </button>
+    </div>
+  );
+}
 
 
 window.App = App;
