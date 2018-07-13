@@ -8,6 +8,7 @@ class App extends React.Component {
       accountInfoFields: ['First Name', 'Last Name', 'Email', 'Password'],
       shippingInfoFields: ['Address 1', 'Address 2', 'City', 'State', 'Zip', 'Phone Number'],
       paymentInfoFields: ['Credit Card Number', 'Expiration Date', 'CVV', 'Billing Zip'],
+      // accountInfo: {}
     };
     this.handleClick = this.handleClick.bind(this);
     this.handlePurchase = this.handlePurchase.bind(this);
@@ -31,7 +32,7 @@ class App extends React.Component {
     $.ajax({
       url: '/',
       method: 'POST',
-      data: 'hello', 
+      data: JSON.stringify({test: 'data'}), 
       success: function(data) {
         console.log('here is data return from server', data);
       },
@@ -43,9 +44,21 @@ class App extends React.Component {
 
   handleChange(event) {
     var key = event.target.className;
-    this.setState({[event.target.className]: event.target.value}, function(){
-      console.log(this.state);
-    });
+    console.log(this.state.accountInfoFields.includes(key));
+    if (this.state.accountInfoFields.includes(key)) {
+      this.setState({accountInfo: {[event.target.className]: event.target.value}}, function(){
+        console.log(this.state);
+      });
+     // {[event.target.className]: event.target.value}
+    } else if (this.state.shippingInfoFields.includes(key)) {
+      this.setState({shippingInfo: {[event.target.className]: event.target.value}}, function(){
+        console.log(this.state);
+      });
+    } else if (this.state.paymentInfoFields.includes(key)) {
+      this.setState({paymentInfo: {[event.target.className]: event.target.value}}, function(){
+        console.log(this.state);
+      });
+    }
   }
 
   handlePurchase(event) {
