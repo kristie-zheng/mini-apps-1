@@ -11,6 +11,7 @@ class App extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handlePurchase = this.handlePurchase.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick(event) {
@@ -40,9 +41,12 @@ class App extends React.Component {
     });
   }
 
-  // handleChange(event) {
-  //   this.setState({:});
-  // }
+  handleChange(event) {
+    var key = event.target.className;
+    this.setState({[event.target.className]: event.target.value}, function(){
+      console.log(this.state);
+    });
+  }
 
   handlePurchase(event) {
   //submit a get request to server
@@ -70,7 +74,7 @@ class App extends React.Component {
         </h1> 
         <DisplayedForm handleClick = {this.handleClick} handlePurchase = {this.handlePurchase} currentPage = {this.state.currentPage}
         accountInfoFields = {this.state.accountInfoFields} shippingInfoFields = {this.state.shippingInfoFields} 
-        paymentInfoFields = {this.state.paymentInfoFields}/>
+        paymentInfoFields = {this.state.paymentInfoFields} handleChange = {this.handleChange}/>
       </div>
     )
   }
@@ -78,13 +82,13 @@ class App extends React.Component {
 
 //each form field
 var FormField = (props) => {
-  // var handleChange = props.handleChange;
+  var handleChange = props.handleChange;
   return (
     <div>
       <span> 
         {props.title}
       </span>
-      <input type="text"/>
+      <input type="text" className = {props.className} onChange = {handleChange}/>
       <br/>
     </div>
   );
@@ -96,7 +100,7 @@ var AccountInformation = (props) => {
   return (
     <div>
     <form className= "accountInfo">
-    {accountInfoFields.map((field) => <FormField title = {field} />)}
+    {accountInfoFields.map((field) => <FormField title = {field} handleChange = {props.handleChange} className = {field}/>)}
     </form>
     <button type = "button" className= "next" onClick = {handleClick}> Next </button>
     </div>
@@ -110,7 +114,7 @@ var ShippingInformation = (props) => {
     //insert form fields here
     <div>
       <form className= "shippingInfo">
-      {shippingInfoFields.map((field) => <FormField title = {field} />)}
+      {shippingInfoFields.map((field) => <FormField title = {field} handleChange = {props.handleChange}/>)}
       </form>
       <button type = "button" className= "next" onClick = {handleClick}> Next </button>
     </div>
@@ -123,7 +127,7 @@ var PaymentInformation = (props) => {
   return (
       <div>
       <form className= "paymentInfo">
-      {paymentInfoFields.map((field) => <FormField title = {field} />)}
+      {paymentInfoFields.map((field) => <FormField title = {field} handleChange = {props.handleChange}/>)}
       </form>
       <button type = "button" className= "submit" onClick = {handleClick}> Submit </button>
     </div>
@@ -144,11 +148,11 @@ var Confirmation = (props) => {
 var DisplayedForm = (props) => {
   var pageToDisplay = props.currentPage;
   if (props.currentPage === 'accountInfo') {
-    return (<AccountInformation accountInfoFields = {props.accountInfoFields} handleClick = {props.handleClick}/>); 
+    return (<AccountInformation accountInfoFields = {props.accountInfoFields} handleClick = {props.handleClick} handleChange = {props.handleChange}/>); 
   } else if (props.currentPage === 'shippingInfo') {
-    return (<ShippingInformation shippingInfoFields = {props.shippingInfoFields} handleClick = {props.handleClick}/>);
+    return (<ShippingInformation shippingInfoFields = {props.shippingInfoFields} handleClick = {props.handleClick} handleChange = {props.handleChange}/>);
   } else if (props.currentPage === 'paymentInfo') {
-    return (<PaymentInformation paymentInfoFields = {props.paymentInfoFields} handleClick = {props.handleClick}/>);
+    return (<PaymentInformation paymentInfoFields = {props.paymentInfoFields} handleClick = {props.handleClick} handleChange = {props.handleChange}/>);
   } else if (props.currentPage === 'confirmation') {
     return (<Confirmation handlePurchase = {props.handlePurchase}/>);
   }
