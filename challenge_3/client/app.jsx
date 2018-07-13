@@ -4,9 +4,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 'accountInfo'
+      currentPage: 'accountInfo',
+      accountInfoFields: ['First Name', 'Last Name', 'Email', 'Password']
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handlePurchase = this.handlePurchase.bind(this);
   }
 
   handleClick(event) {
@@ -35,33 +37,63 @@ class App extends React.Component {
       }
     });
   }
+
+  // handleChange(event) {
+  //   this.setState({:});
+  // }
+
+  handlePurchase(event) {
+  //submit a get request to server
+  //retrieve the database data (use query)
+  //render it on the dom
+  console.log('hi')
+  $.ajax({
+    url: '/',
+    method: 'GET',
+    data: 'useremail',
+    success: function(data) {
+      console.log('here is data returned from serer', data);
+    },
+    error: function(error) {
+      console.log('error of get req', error);
+    }
+  });
+  }
+
   render() {
     return (
       <div> 
         <h1> 
           Checkout 
         </h1> 
-        <DisplayedForm handleClick = {this.handleClick} currentPage = {this.state.currentPage}/>
+        <DisplayedForm handleClick = {this.handleClick} handlePurchase = {this.handlePurchase} currentPage = {this.state.currentPage}
+        accountInfoFields = {this.state.accountInfoFields}/>
       </div>
     )
   }
 }
+
+//each form field
+var FormField = (props) => {
+  // var handleChange = props.handleChange;
+  return (
+    <div>
+      <span> 
+        {props.title}
+      </span>
+      <input type="text"/>
+      <br/>
+    </div>
+  );
+}
 //form1 component
 var AccountInformation = (props) => {
   var handleClick = props.handleClick;
+  var accountInfoFields = props.accountInfoFields; //this is an array of titles
   return (
-    //insert form fields here
     <div>
-   
-    <form className= "accountInfo" method="post" action="server.js">
-      First Name: 
-      <input type ="text" className= "firstName"/> <br/>
-      Last Name:
-      <input type ="text" className= "lastName"/> <br/>
-      Email: 
-      <input type ="text" className= "email"/> <br/>
-      Password: 
-      <input type ="text" className= "password"/> <br/>
+    <form className= "accountInfo">
+    {accountInfoFields.map((field) => <FormField title = {field} />)}
     </form>
     <button type = "button" className= "next" onClick = {handleClick}> Next </button>
     </div>
@@ -113,24 +145,26 @@ var PaymentInformation = (props) => {
 }
 
 var Confirmation = (props) => {
+  var handlePurchase = props.handlePurchase;
   return (
     <div>
     <p>Confirmation</p>
-    <button type = "button" className= "purchase"> Purchase </button>
+    <button type = "button" className= "purchase" onClick = {handlePurchase}> Purchase </button>
     </div>
   )
 }
 
+
 var DisplayedForm = (props) => {
   var pageToDisplay = props.currentPage;
   if (props.currentPage === 'accountInfo') {
-    return (<AccountInformation handleClick = {props.handleClick}/>); 
+    return (<AccountInformation accountInfoFields = {props.accountInfoFields} handleClick = {props.handleClick}/>); 
   } else if (props.currentPage === 'shippingInfo') {
     return (<ShippingInformation handleClick = {props.handleClick}/>);
   } else if (props.currentPage === 'paymentInfo') {
     return (<PaymentInformation handleClick = {props.handleClick}/>);
   } else if (props.currentPage === 'confirmation') {
-    return (<Confirmation/>);
+    return (<Confirmation handlePurchase = {props.handlePurchase}/>);
   }
 }
 
