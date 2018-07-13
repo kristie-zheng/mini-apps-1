@@ -5,7 +5,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentPage: 'accountInfo',
-      accountInfoFields: ['First Name', 'Last Name', 'Email', 'Password']
+      accountInfoFields: ['First Name', 'Last Name', 'Email', 'Password'],
+      shippingInfoFields: ['Address 1', 'Address 2', 'City', 'State', 'Zip', 'Phone Number'],
+      paymentInfoFields: ['Credit Card Number', 'Expiration Date', 'CVV', 'Billing Zip'],
     };
     this.handleClick = this.handleClick.bind(this);
     this.handlePurchase = this.handlePurchase.bind(this);
@@ -67,7 +69,8 @@ class App extends React.Component {
           Checkout 
         </h1> 
         <DisplayedForm handleClick = {this.handleClick} handlePurchase = {this.handlePurchase} currentPage = {this.state.currentPage}
-        accountInfoFields = {this.state.accountInfoFields}/>
+        accountInfoFields = {this.state.accountInfoFields} shippingInfoFields = {this.state.shippingInfoFields} 
+        paymentInfoFields = {this.state.paymentInfoFields}/>
       </div>
     )
   }
@@ -102,23 +105,12 @@ var AccountInformation = (props) => {
 
 var ShippingInformation = (props) => {
   var handleClick = props.handleClick;
+  var shippingInfoFields = props.shippingInfoFields;
   return (
     //insert form fields here
     <div>
       <form className= "shippingInfo">
-        Address: 
-        <input type ="text" className= "address1"/> <br/>
-        Address Line 2: 
-        <input type ="text" className= "address2"/> <br/>
-        City: 
-        <input type ="text" className= "city"/> <br/>
-        State:
-        <input type ="text" className= "state"/> <br/>
-        Zipcode:
-        <input type ="text" className= "zip"/> <br/>
-        Phone Number:
-        <input type ="text" className= "phone"/> <br/>
-
+      {shippingInfoFields.map((field) => <FormField title = {field} />)}
       </form>
       <button type = "button" className= "next" onClick = {handleClick}> Next </button>
     </div>
@@ -127,17 +119,11 @@ var ShippingInformation = (props) => {
 
 var PaymentInformation = (props) => {
   var handleClick = props.handleClick;
+  var paymentInfoFields = props.paymentInfoFields;
   return (
       <div>
       <form className= "paymentInfo">
-        Credit Card Number:
-        <input type="text" className= "creditCardNum"/> <br/>
-        Expiration Date:
-        <input type = "text" className = "expirationDate"/><br/>
-        CVV:
-        <input type="text" className= "cvv"/><br/>
-        Billing Zipcode:
-        <input type="text" className="billingZip"/><br/>
+      {paymentInfoFields.map((field) => <FormField title = {field} />)}
       </form>
       <button type = "button" className= "submit" onClick = {handleClick}> Submit </button>
     </div>
@@ -160,9 +146,9 @@ var DisplayedForm = (props) => {
   if (props.currentPage === 'accountInfo') {
     return (<AccountInformation accountInfoFields = {props.accountInfoFields} handleClick = {props.handleClick}/>); 
   } else if (props.currentPage === 'shippingInfo') {
-    return (<ShippingInformation handleClick = {props.handleClick}/>);
+    return (<ShippingInformation shippingInfoFields = {props.shippingInfoFields} handleClick = {props.handleClick}/>);
   } else if (props.currentPage === 'paymentInfo') {
-    return (<PaymentInformation handleClick = {props.handleClick}/>);
+    return (<PaymentInformation paymentInfoFields = {props.paymentInfoFields} handleClick = {props.handleClick}/>);
   } else if (props.currentPage === 'confirmation') {
     return (<Confirmation handlePurchase = {props.handlePurchase}/>);
   }
